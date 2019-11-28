@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         if(classNumber<48){
             var down=classNumber+ 12};
         if(classNumber<60){
-            var right1=classNumber+ 1};
+            var right=classNumber + 1};
 
 
         if(classNumber>2){
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 //id divup up!==null {let let divUpColor=divUp.style.backgroundColor;
         if(divUp!==null){
-            var divUpColor=divUp.style.backgroundColor;
+
         }
         if(divDown!==null){
             var divDownColor=divDown.style.backgroundColor;
