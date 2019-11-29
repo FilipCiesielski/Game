@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM IS READY GO FILIP!");
 
+    const gridContainer = document.querySelector("#container");
 
-    const container = document.querySelector("#container");
     const colors = [
         orange = "rgb(255,186,28)",
         blue = "rgb(101,124,255)",
@@ -13,57 +13,52 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
 
-     function makeRows(rows, cols) {
-        container.style.setProperty('--grid-rows', rows);
-        container.style.setProperty('--grid-cols', cols);
+    function makeGrid(rows, cols) {
+        gridContainer.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+         gridContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
         for (el = 0; el < (rows * cols); el++) {
             let cell = document.createElement("div");
             cell.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            let gridElementClass = (el + 1);
-            container.appendChild(cell).className = `div${gridElementClass}`;
 
+            const colCount = cols;
+            const rowPositionClass = Math.floor([el] / colCount);
+            const colPositionClass = [el] % colCount;
+            gridContainer.appendChild(cell).className=`${rowPositionClass+1}/${colPositionClass+1}`;
         };
 
-         let gridElements=document.getElementById("container").children;
-         Array.from(gridElements).map((el)=>
-             el.addEventListener("click", () =>
-             gridElementInfo(el.className,el.style.backgroundColor)
-         ))
-     };
+        let gridElements = document.getElementById("container").children;
+        Array.from(gridElements).map((el, index) =>
+            el.addEventListener("click", () => {
+                    console.log(gridSingleElementPosition(index)),
+                    gridSingleElementInfo(el.style.backgroundColor,el.className)
+                }
+            ))
+    };
 
-    makeRows(5, 12);
-
-
-    const gridElementInfo=(divName,divColor)=>{
-
-var divClassName=parseInt(divName.slice(3));
-
-        function check() {
-            var up = divClassName+12;
-            var up12 = document.querySelector(".div" + `${up}`);
-            console.log(up)
-            var color12 = up12.style.backgroundColor;
-            if (divColor === color12) {
-                console.log("ok");
-
-            }
-        }
-
-check()
-
-        };
+    makeGrid(5, 12);
 
 
+    const gridSingleElementPosition = (index) => {
+        const colCount = gridContainer.style.gridTemplateColumns.split(" ").length;
+        const rowPosition = Math.floor(index / colCount);
+        const colPosition = index % colCount;
+             return {row: rowPosition, column: colPosition};
+    };
 
+
+const gridSingleElementInfo=(divColor,divPosition)=>{
+    console.log(divColor,divPosition);
+let check=()=> {
+    document.getElementsByClassName(divPosition)
+    const mydiv=document.getElementsByClassName(divPosition)
+    console.log(mydiv[0])
+}
+// const mydiv=document.getElementsByClassName(divPosition)
+//     console.log(mydiv[0])
 
 
 
-
-
-
-
-
-
+};
 
 
 });
