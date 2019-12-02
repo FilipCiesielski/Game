@@ -24,14 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const rowPositionClass = Math.floor([el] / cols);
             const colPositionClass = [el] % cols;
             gridContainer.appendChild(cell).className = `${rowPositionClass}/${colPositionClass}`;
-            ;
         }
         ;
 
 
         Array.from(gridContainer.children).map((el, index) =>
             el.addEventListener("click", () => {
-                    gridSingleElementInfo(el.style.backgroundColor, el.className, index)
+                    const rowPositionSingle = Math.floor(index / cols);
+                    gridSingleElementInfo(el.style.backgroundColor, index, rowPositionSingle)
                 }
             ))
     };
@@ -39,40 +39,27 @@ document.addEventListener("DOMContentLoaded", () => {
     makeGrid(createRows, createColumns);
 
 
-    const gridSingleElementInfo = (divColor, divPosition, index) => {
-        console.log(divColor, divPosition, index);
-        console.log(index - createColumns, gridContainer.children.length - 1);
+    const gridSingleElementInfo = (divColor, index, rowPositionSingle) => {
+        console.log(divColor, index);
 
-        if (index < gridContainer.children.length - 1) {
+        const rowPositionPrevious = Math.floor((index - 1) / createColumns);
+        const rowPositionNext = Math.floor((index + 1) / createColumns);
+
+        if (index > 0 && rowPositionSingle === rowPositionPrevious) {
+            var previousPosition = gridContainer.children.item(`${index - 1}`).style.backgroundColor
+        }
+
+        if (index < gridContainer.children.length - 1 && rowPositionSingle === rowPositionNext) {
             var nextPosition = gridContainer.children.item(`${index + 1}`).style.backgroundColor;
         }
-        if (index > 0) {
-            var previousPosition = gridContainer.children.item(`${index - 1}`).style.backgroundColor;
-        }
+
         if (index >= createColumns) {
             var upPosition = gridContainer.children.item(`${index - createColumns}`).style.backgroundColor;
         }
         if (index < gridContainer.children.length - createColumns) {
             var downPosition = gridContainer.children.item(`${index + createColumns}`).style.backgroundColor;
         }
-
-        console.log(nextPosition, previousPosition, upPosition, downPosition);
-        if (divColor === previousPosition) {
-            gridContainer.children.item(index).style.backgroundColor = "white";
-            gridContainer.children.item(`${index - 1}`).style.backgroundColor = "white"
-        }
-        if (divColor === nextPosition) {
-            gridContainer.children.item(index).style.backgroundColor = "white";
-            gridContainer.children.item(`${index + 1}`).style.backgroundColor = "white"
-        }
-        if (divColor === upPosition) {
-            gridContainer.children.item(index).style.backgroundColor = "white";
-            gridContainer.children.item(`${index - createColumns}`).style.backgroundColor = "white"
-        }
-        if (divColor === downPosition) {
-            gridContainer.children.item(index).style.backgroundColor = "white";
-            gridContainer.children.item(`${index + createColumns}`).style.backgroundColor = "white"
-        }
+        console.log(previousPosition,nextPosition,upPosition,downPosition)
 
     }
 
