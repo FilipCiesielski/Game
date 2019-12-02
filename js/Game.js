@@ -11,8 +11,27 @@ document.addEventListener("DOMContentLoaded", () => {
         red = "rgb(255,140,80)"
 
     ];
-    const createRows = 5;
-    const createColumns = 12;
+    //  let button=document.querySelector(".play");
+    //  button.addEventListener("click",()=>{
+    //      gridContainer.innerHTML="";
+    //  let createRows=document.getElementById("createRows").value;
+    // let createColumns = document.getElementById("createColumns").value;
+    //  if(createColumns==="" && createRows==="") {
+    //      alert( "podaj liczbę wierszy i kolumn")
+    //
+    //  }else if(createRows==="" ) {
+    //
+    //      alert("podaj liczbę wierszy")
+    //  }else if (createColumns==="" ){
+    //
+    //    alert ("podaj liczbę kolumn")
+    //  }
+    //      makeGrid(createRows, createColumns);
+    //
+    //  })
+
+    let createRows = 5
+    let createColumns = 12
 
     const makeGrid = (rows, cols) => {
         gridContainer.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
@@ -23,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const rowPositionClass = Math.floor([el] / cols);
             const colPositionClass = [el] % cols;
+
             gridContainer.appendChild(cell).className = `${rowPositionClass}/${colPositionClass}`;
         }
         ;
@@ -31,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         Array.from(gridContainer.children).map((el, index) =>
             el.addEventListener("click", () => {
                     const rowPositionSingle = Math.floor(index / cols);
-                    gridSingleElementInfo(el.style.backgroundColor, index, rowPositionSingle)
+                    gridSingleElementInfo(el.style.backgroundColor, index, rowPositionSingle, false,null,null)
                 }
             ))
     };
@@ -39,28 +59,50 @@ document.addEventListener("DOMContentLoaded", () => {
     makeGrid(createRows, createColumns);
 
 
-    const gridSingleElementInfo = (divColor, index, rowPositionSingle) => {
+    const gridSingleElementInfo = (divColor, index, rowPositionSingle, previousWhite,previousIndex,previousColumn) => {
         console.log(divColor, index);
-
         const rowPositionPrevious = Math.floor((index - 1) / createColumns);
         const rowPositionNext = Math.floor((index + 1) / createColumns);
 
-        if (index > 0 && rowPositionSingle === rowPositionPrevious) {
-            var previousPosition = gridContainer.children.item(`${index - 1}`).style.backgroundColor
+        if (index > 0 && rowPositionSingle === rowPositionPrevious && divColor === gridContainer.children.item(`${index - 1}`).style.backgroundColor &&  index-1!=previousIndex) {
+            if (!previousWhite) {
+                gridContainer.children.item(index).style.backgroundColor = "white"
+            }
+
+            gridSingleElementInfo(divColor, index - 1, rowPositionSingle, true, index)
+
         }
 
-        if (index < gridContainer.children.length - 1 && rowPositionSingle === rowPositionNext) {
-            var nextPosition = gridContainer.children.item(`${index + 1}`).style.backgroundColor;
+        if (index < gridContainer.children.length - 1 && rowPositionSingle === rowPositionNext && divColor === gridContainer.children.item(`${index +1}`).style.backgroundColor   && index+1!=previousIndex) {
+            if (!previousWhite) {
+                gridContainer.children.item(index).style.backgroundColor = "white"
+            }
+
+            gridSingleElementInfo(divColor, index + 1, rowPositionSingle, true, index)
         }
 
-        if (index >= createColumns) {
-            var upPosition = gridContainer.children.item(`${index - createColumns}`).style.backgroundColor;
-        }
-        if (index < gridContainer.children.length - createColumns) {
-            var downPosition = gridContainer.children.item(`${index + createColumns}`).style.backgroundColor;
-        }
-        console.log(previousPosition,nextPosition,upPosition,downPosition)
+        if (index >= createColumns && divColor === gridContainer.children.item(`${index-createColumns}`).style.backgroundColor   && index+1!=previousIndex && index-createColumns!=previousColumn) {
+            if (!previousWhite) {
+                gridContainer.children.item(index).style.backgroundColor = "white"
+            }
 
+            gridSingleElementInfo(divColor, index -createColumns, rowPositionSingle, true, index,index)
+        }
+        if (index < gridContainer.children.length - createColumns && divColor === gridContainer.children.item(`${index+createColumns}`).style.backgroundColor   && index+1!=previousIndex && index+createColumns!=previousColumn) {
+
+            if (!previousWhite) {
+                gridContainer.children.item(index).style.backgroundColor = "white"
+            }
+
+            gridSingleElementInfo(divColor, index +createColumns, rowPositionSingle, true, index,index)
+
+
+        }
+
+        if (previousWhite) {
+            gridContainer.children.item(index).style.backgroundColor = "white"
+
+        }
     }
 
 
