@@ -11,54 +11,70 @@ document.addEventListener("DOMContentLoaded", () => {
         red = "rgb(255,140,80)"
 
     ];
+    const createRows = 5;
+    const createColumns = 12;
 
-
-    function makeGrid(rows, cols) {
+    const makeGrid = (rows, cols) => {
         gridContainer.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
-         gridContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+        gridContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
         for (el = 0; el < (rows * cols); el++) {
             let cell = document.createElement("div");
             cell.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 
-            const colCount = cols;
-            const rowPositionClass = Math.floor([el] / colCount);
-            const colPositionClass = [el] % colCount;
-            gridContainer.appendChild(cell).className=`${rowPositionClass+1}/${colPositionClass+1}`;
-        };
+            const rowPositionClass = Math.floor([el] / cols);
+            const colPositionClass = [el] % cols;
+            gridContainer.appendChild(cell).className = `${rowPositionClass}/${colPositionClass}`;
+            ;
+        }
+        ;
 
-        let gridElements = document.getElementById("container").children;
-        Array.from(gridElements).map((el, index) =>
+
+        Array.from(gridContainer.children).map((el, index) =>
             el.addEventListener("click", () => {
-                    console.log(gridSingleElementPosition(index)),
-                    gridSingleElementInfo(el.style.backgroundColor,el.className)
+                    gridSingleElementInfo(el.style.backgroundColor, el.className, index)
                 }
             ))
     };
 
-    makeGrid(5, 12);
+    makeGrid(createRows, createColumns);
 
 
-    const gridSingleElementPosition = (index) => {
-        const colCount = gridContainer.style.gridTemplateColumns.split(" ").length;
-        const rowPosition = Math.floor(index / colCount);
-        const colPosition = index % colCount;
-             return {row: rowPosition, column: colPosition};
-    };
+    const gridSingleElementInfo = (divColor, divPosition, index) => {
+        console.log(divColor, divPosition, index);
+        console.log(index - createColumns, gridContainer.children.length - 1);
 
+        if (index < gridContainer.children.length - 1) {
+            var nextPosition = gridContainer.children.item(`${index + 1}`).style.backgroundColor;
+        }
+        if (index > 0) {
+            var previousPosition = gridContainer.children.item(`${index - 1}`).style.backgroundColor;
+        }
+        if (index >= createColumns) {
+            var upPosition = gridContainer.children.item(`${index - createColumns}`).style.backgroundColor;
+        }
+        if (index < gridContainer.children.length - createColumns) {
+            var downPosition = gridContainer.children.item(`${index + createColumns}`).style.backgroundColor;
+        }
 
-const gridSingleElementInfo=(divColor,divPosition)=>{
-    console.log(divColor,divPosition);
-let check=()=> {
-    document.getElementsByClassName(divPosition)
-    const mydiv=document.getElementsByClassName(divPosition)
-    console.log(mydiv[0])
-}
-// const mydiv=document.getElementsByClassName(divPosition)
-//     console.log(mydiv[0])
+        console.log(nextPosition, previousPosition, upPosition, downPosition);
+        if (divColor === previousPosition) {
+            gridContainer.children.item(index).style.backgroundColor = "white";
+            gridContainer.children.item(`${index - 1}`).style.backgroundColor = "white"
+        }
+        if (divColor === nextPosition) {
+            gridContainer.children.item(index).style.backgroundColor = "white";
+            gridContainer.children.item(`${index + 1}`).style.backgroundColor = "white"
+        }
+        if (divColor === upPosition) {
+            gridContainer.children.item(index).style.backgroundColor = "white";
+            gridContainer.children.item(`${index - createColumns}`).style.backgroundColor = "white"
+        }
+        if (divColor === downPosition) {
+            gridContainer.children.item(index).style.backgroundColor = "white";
+            gridContainer.children.item(`${index + createColumns}`).style.backgroundColor = "white"
+        }
 
-
-
-};
+    }
 
 
 });
