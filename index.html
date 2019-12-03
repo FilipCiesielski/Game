@@ -5,28 +5,37 @@
     <meta charset="UTF-8">
     <title>ColorsGame</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Overpass&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bahianita|Bungee+Shade&display=swap" rel="stylesheet">
     <script src="js/Game.js"></script>
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
+<section class="box">
 <header>
+    <div class="box__makeRows&Columns">
 <label>
     number of rows
-    <input type="number" id="createRows" min="1" max="20"  placeholder="from 1-20">
+    <input type="number" id="createRows" min="1" max="20"  >
 </label>
 <label>
     number of columns
-    <input type="number" id="createColumns"  min="1" max="35" placeholder="from 1-35">
+    <input type="number" id="createColumns"  min="1" max="35" >
 </label>
-<button class="play">let's play!</button>
+<button class="play">play!</button>
+    </div>
+    <div class="box__score">
+        SCORE
+        <div class="box__score__result"></div>
+
+    </div>
 
 </header>
 <div id="container">
 </div>
 
-
+</section>
 </body>
 
 </html>
