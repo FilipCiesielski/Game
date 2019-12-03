@@ -57,10 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     makeGrid(createRows, createColumns);
+
+
     var score=0;
-    var score2=0;
-    var score3=0;
-    var score4=0;
 
 
 
@@ -71,10 +70,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         if (index > 0 && rowPositionSingle === rowPositionPrevious && divColor === gridContainer.children.item(`${index - 1}`).style.backgroundColor &&  index-1!=previousIndex) {
-            score=score+1;
+
             if (!previousWhite) {
+
                 gridContainer.children.item(index).style.backgroundColor = "white"
-                score=score+1;
+
+
 
             }
 
@@ -83,10 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (index < gridContainer.children.length - 1 && rowPositionSingle === rowPositionNext && divColor === gridContainer.children.item(`${index +1}`).style.backgroundColor   && index+1!=previousIndex) {
-score2=score2+1;
+
             if (!previousWhite) {
                 gridContainer.children.item(index).style.backgroundColor = "white"
-                score2=score2+1;
+
 
             }
 
@@ -94,19 +95,19 @@ score2=score2+1;
         }
 
         if (index >= createColumns && divColor === gridContainer.children.item(`${index-createColumns}`).style.backgroundColor   && index-createColumns!=previousColumn) {
-            score3=score3+1;
+
             if (!previousWhite) {
                 gridContainer.children.item(index).style.backgroundColor = "white"
-                score3=score3+1;
+
             }
 
             gridSingleElementInfo(divColor, index -createColumns, rowPositionSingle, true, index,index)
         }
         if (index < gridContainer.children.length - createColumns && divColor === gridContainer.children.item(`${index+createColumns}`).style.backgroundColor   && index+createColumns!=previousColumn) {
-            // score4=score4+1;
+
             if (!previousWhite) {
                 gridContainer.children.item(index).style.backgroundColor = "white"
-                score4=score4+1;
+
             }
 
             gridSingleElementInfo(divColor, index +createColumns, rowPositionSingle, true, index,index)
@@ -116,10 +117,14 @@ score2=score2+1;
 
         if (previousWhite) {
             gridContainer.children.item(index).style.backgroundColor = "white"
+            score=score+1;
+
+
 
         }
+
         let scoreBox=document.querySelector(".box__score__result")
-            console.log(score,score2,score3,score4)
+            console.log(score)
     }
 
 
