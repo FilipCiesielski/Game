@@ -81,14 +81,14 @@ document.addEventListener("DOMContentLoaded", () => {
             gridSingleElementInfo(divColor, index + 1, rowPositionSingle, true, index)
         }
 
-        if (index >= createColumns && divColor === gridContainer.children.item(`${index-createColumns}`).style.backgroundColor   && index+1!=previousIndex && index-createColumns!=previousColumn) {
+        if (index >= createColumns && divColor === gridContainer.children.item(`${index-createColumns}`).style.backgroundColor   && index-createColumns!=previousColumn) {
             if (!previousWhite) {
                 gridContainer.children.item(index).style.backgroundColor = "white"
             }
 
             gridSingleElementInfo(divColor, index -createColumns, rowPositionSingle, true, index,index)
         }
-        if (index < gridContainer.children.length - createColumns && divColor === gridContainer.children.item(`${index+createColumns}`).style.backgroundColor   && index+1!=previousIndex && index+createColumns!=previousColumn) {
+        if (index < gridContainer.children.length - createColumns && divColor === gridContainer.children.item(`${index+createColumns}`).style.backgroundColor   && index+createColumns!=previousColumn) {
 
             if (!previousWhite) {
                 gridContainer.children.item(index).style.backgroundColor = "white"
