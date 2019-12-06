@@ -1,3 +1,16 @@
+
+* {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@mixin flexSettings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @mixin border__effect {
   border: 3px outset darkgray;
   border-radius: 10px 10px 10px 10px;
