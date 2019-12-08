@@ -1,11 +1,11 @@
 @import "mixins";
 
-
 body {
   background-color: rgb(125, 98, 163);
 
   .box {
     width: 75vw;
+    min-width: 60rem;
     display: flex;
     flex-direction: column;
 
@@ -27,11 +27,32 @@ body {
 
         .box__createRows__createColumns, .box__play__buttons {
           width: 100%;
+          justify-content: flex-start;
           font-size: 1.5rem;
           margin-top: 0.5rem;
-          justify-content: flex-start;
 
-          //@include flexSettings;
+          i {
+            &:hover {
+              cursor: pointer;
+
+              &:after {
+                content: "You can play on time \a Set time in seconds\a Press start \a Have fun !\a :)";
+                white-space: pre;
+                display: block;
+                position: absolute;
+                width: 10rem;
+                height: 8rem;
+                font-size: 1rem;
+                color: white;
+                line-height: 1.5rem;
+                text-align: center;
+                background-color: rgb(125, 98, 163);
+                padding-top: 1rem;
+                z-index: 3;
+                @include border__effect;
+              }
+            }
+          }
 
           input[type=number] {
             width: 3rem;

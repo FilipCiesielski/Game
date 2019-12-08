@@ -6,6 +6,8 @@
     <title>Game</title>
     <link href="https://fonts.googleapis.com/css?family=Audiowide|Overpass&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bahianita|Bungee+Shade&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+
     <script src="js/Game.js"></script>
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -13,6 +15,16 @@
 <section class="box">
     <header>
         <div class="box__gameSettings">
+            <div class="box__play__buttons">
+                <i class="far fa-question-circle"></i>
+                <label>
+                    set time
+                    <input type="number" value="0" id="timeSettings">
+
+                </label>
+                <button>START</button>
+
+            </div>
         <div class="box__createRows__createColumns">
             <label>
                 rows
@@ -24,15 +36,7 @@
             </label>
             <button>play!</button>
         </div>
-        <div class="box__play__buttons">
-            <label>
-                set time
-            <input type="number" value="30" id="timeSettings">
-            </label>
-            <button>start</button>
-
-        </div>
-        </div>
+              </div>
         <div class="box__score">
             <span>SCORE:</span>
             <div class="box__score--result">0</div>

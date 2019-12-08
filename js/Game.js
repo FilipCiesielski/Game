@@ -138,48 +138,46 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         return NOT_FOUND_INDEX;
     };
-
     const getColumnIndex = (index, cols) => index % cols;
 
     let button = document.querySelectorAll("button");
 
+    function playOnButton() {
+        gridContainer.innerHTML = "";
 
+        let scoreBox = document.querySelector(".box__score--result").textContent = 0;
+        score = 0;
+        let createRows = document.getElementById("createRows").value;
+        let createColumns = document.getElementById("createColumns").value;
 
-function playOnButton(){
-    gridContainer.innerHTML = "";
-    createGrid(8, 12);
-    let scoreBox = document.querySelector(".box__score--result").textContent = 0;
-    let createRows = document.getElementById("createRows").value;
-    let createColumns = document.getElementById("createColumns").value;
-
-    if (createColumns === "" && createRows === "") {
-        confirm("please enter the number of columns and rows")
-    } else if (createRows === "") {
-        confirm("please enter the number of rows")
-    } else if (createColumns === "") {
-        confirm("please enter the number of columns")
+        if (createColumns === "" && createRows === "") {
+            confirm("please enter the number of columns and rows")
+        } else if (createRows === "") {
+            confirm("please enter the number of rows")
+        } else if (createColumns === "") {
+            confirm("please enter the number of columns")
+        }
+        createGrid(createRows, createColumns);
     }
-}
     button[0].addEventListener("click", () => {
-    playOnButton()
+        let timeSettings = document.getElementById("timeSettings").value;
+
+        const timer = () => {
+            setTimeout(() => {
+                confirm("Time's up!\nYour score " + score);
+            }, `${timeSettings * 1000}`);
+        };
+
+        timer();
+        playOnButton()
+    })
+    button[1].addEventListener("click", () => {
+        playOnButton()
+
     });
 
 
-button[1].addEventListener("click",()=>{
-playOnButton();
-let timeSettings=document.getElementById("timeSettings").value;
 
-    const timer=()=> {
-        setTimeout(()=>{
-            alert("Time's up!\nYour score " +score);
-
-            }, `${timeSettings*1000}`);
-    }
-    gridContainer.innerHTML = "";
-    createGrid(8, 12);
-    let scoreBox = document.querySelector(".box__score--result").textContent = 0;
-    timer()
-})
 
 });
 
