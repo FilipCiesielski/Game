@@ -2,9 +2,11 @@
 
 body {
   background-color: rgb(125, 98, 163);
+   width: 90vw;
+  min-width:45rem;
 
   .box {
-    width: 80vw;
+    //width: 80vw;
     display: flex;
     flex-direction: column;
 

@@ -142,39 +142,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let button = document.querySelectorAll("button");
 
-    function playOnButton() {
-        gridContainer.innerHTML = "";
-
-        let scoreBox = document.querySelector(".box__score--result").textContent = 0;
-        score = 0;
-        let createRows = document.getElementById("createRows").value;
-        let createColumns = document.getElementById("createColumns").value;
-
-        if (createColumns === "" && createRows === "") {
-            confirm("please enter the number of columns and rows")
-        } else if (createRows === "") {
-            confirm("please enter the number of rows")
-        } else if (createColumns === "") {
-            confirm("please enter the number of columns")
-        }
-        createGrid(createRows, createColumns);
-    }
-    button[0].addEventListener("click", () => {
-        let timeSettings = document.getElementById("timeSettings").value;
-
-        const playOnTime = () => {
-            setTimeout(() => {
-                confirm("Time's up!\nYour score " + score);
-            }, `${timeSettings * 1000}`);
-        };
-
-        playOnTime();
-        playOnButton()
-    });
-    button[1].addEventListener("click", () => {
-        playOnButton()
-
-    });
+    // function playOnButton() {
+    //     gridContainer.innerHTML = "";
+    //
+    //     let scoreBox = document.querySelector(".box__score--result").textContent = 0;
+    //     score = 0;
+    //     let createRows = document.getElementById("createRows").value;
+    //     let createColumns = document.getElementById("createColumns").value;
+    //
+    //     if (createColumns === "" && createRows === "") {
+    //         confirm("please enter the number of columns and rows")
+    //     } else if (createRows === "") {
+    //         confirm("please enter the number of rows")
+    //     } else if (createColumns === "") {
+    //         confirm("please enter the number of columns")
+    //     }
+    //     createGrid(createRows, createColumns);
+    // }
+    // button[0].addEventListener("click", () => {
+    //     let timeSettings = document.getElementById("timeSettings").value;
+    //
+    //     const playOnTime = () => {
+    //         setTimeout(() => {
+    //             confirm("Time's up!\nYour score " + score);
+    //         }, `${timeSettings * 1000}`);
+    //     };
+    //
+    //     playOnTime();
+    //     playOnButton()
+    // });
+    // button[1].addEventListener("click", () => {
+    //     playOnButton()
+    //
+    // });
 
 });
 
