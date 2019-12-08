@@ -162,22 +162,19 @@ document.addEventListener("DOMContentLoaded", () => {
     button[0].addEventListener("click", () => {
         let timeSettings = document.getElementById("timeSettings").value;
 
-        const timer = () => {
+        const playOnTime = () => {
             setTimeout(() => {
                 confirm("Time's up!\nYour score " + score);
             }, `${timeSettings * 1000}`);
         };
 
-        timer();
+        playOnTime();
         playOnButton()
-    })
+    });
     button[1].addEventListener("click", () => {
         playOnButton()
 
     });
-
-
-
 
 });
 
