@@ -6,37 +6,27 @@
     <title>Game</title>
     <link href="https://fonts.googleapis.com/css?family=Audiowide|Overpass&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bahianita|Bungee+Shade&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
-
     <script src="js/Game.js"></script>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 <section class="box">
+    <div class="hidden">
+        <p>Game Over<br/>no moves possible</p>
+        <div class="close">X</div>
+    </div>
     <header>
-        <div class="box__gameSettings">
-            <div class="box__play__buttons">
-                <i class="far fa-question-circle"></i>
-                <label>
-                    set time
-                    <input type="number" value="0" id="timeSettings">
-
-                </label>
-                <button>START</button>
-
-            </div>
         <div class="box__createRows__createColumns">
             <label>
                 rows
-                <input type="number" value="8" id="createRows" min="1" max="20">
+                <input type="number" value="8" min="1" id="createRows">
             </label>
             <label>
                 columns
-                <input type="number" value="12" id="createColumns" min="1" max="35">
+                <input type="number" value="12" min="1" id="createColumns">
             </label>
-            <button>play!</button>
+            <button id="box__button__play">play!</button>
         </div>
-              </div>
         <div class="box__score">
             <span>SCORE:</span>
             <div class="box__score--result">0</div>
