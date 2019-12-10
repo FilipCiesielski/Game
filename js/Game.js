@@ -197,7 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function playOnButton() {
         gridContainer.innerHTML = "";
         scoreBox.textContent = 0;
-
         let createRows = document.getElementById("createRows").value;
         let createColumns = document.getElementById("createColumns").value;
         if (createColumns === "" || createColumns == 0 && createRows === "" || createRows <= 0) {

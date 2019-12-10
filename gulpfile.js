@@ -3,7 +3,7 @@ var jshint = require("gulp-jshint");
 var sass = require("gulp-sass");
 var gulp=require("gulp");
 
-gulp.task("dupa",function(done){
+gulp.task("hello",function(done){
     console.log("Hello world");
     done()
 });
