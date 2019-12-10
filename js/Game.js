@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM IS READY GO FILIP!");
 
     const gridContainer = document.querySelector("#grid__container");
-    var scoreBox = document.querySelector(".box__score--result");
-    var score = 0;
     const emptyFieldColor = "white";
     const notFoundIndex = -1;
+    const buttonPlay = document.getElementById("box__button__play");
     const colors = [
         "rgb(255,186,28)",
         "rgb(101,124,255)",
@@ -14,16 +12,21 @@ document.addEventListener("DOMContentLoaded", () => {
         "rgb(255,140,80)"
     ];
 
+    var scoreBox = document.querySelector(".box__score--result");
+    var score = 0;
+
+
+    createGrid(8, 12);
+
     function createGrid(rows, cols) {
         gridContainer.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
         gridContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
         let isCreateGrid = true;
         while (isCreateGrid) {
-
-            for (grid = 0; grid < (rows * cols); grid++) {
+            for (let grid = 0; grid < (rows * cols); grid++) {
                 let gridField = document.createElement("div");
                 gridField.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                gridContainer.appendChild(gridField)
+                gridContainer.appendChild(gridField);
             }
 
             isCreateGrid = isEndGame(gridContainer.children, cols);
@@ -31,19 +34,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 gridContainer.innerHTML = "";
             }
         }
-        setEventsOnFields(cols)
-    }
 
-    createGrid(8, 12);
+        setEventsOnFields(cols);
+    }
 
     function setEventsOnFields(cols) {
 
         let gridFields = gridContainer.children;
-
         Array.from(gridFields).map((currentField, index) =>
             currentField.addEventListener("click", () => {
                     let similarFieldsIndex = [index];
-                    // let scoreCounter = document.querySelector(".box__score--result");
 
                     checkNeighbourField(index, currentField.style.backgroundColor, gridFields, cols, similarFieldsIndex);
 
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             gameOverDiv.className = "box__gameOver";
                             let closeGameOver = document.querySelector(".close");
                             closeGameOver.addEventListener("click", () => {
-                                gameOverDiv.className = "hidden"
+                                gameOverDiv.className = "hidden";
                             })
 
                         }
@@ -79,15 +79,18 @@ document.addEventListener("DOMContentLoaded", () => {
             let firstIndexInCurrentRow = currentRow * cols;
             let lastIndexInCurrentRow = firstIndexInCurrentRow + cols - 1;
             let currentFieldColor = gridFields[i].style.backgroundColor;
+
             if (rightIndex <= lastIndexInCurrentRow) {
                 let rightFieldGridColor = gridFields[i + 1].style.backgroundColor;
                 if (currentFieldColor === rightFieldGridColor) {
+
                     return false
                 }
             }
             if (bottomIndex < gridFields.length) {
                 let bottomFieldGridColor = gridFields[i + cols].style.backgroundColor;
                 if (currentFieldColor === bottomFieldGridColor) {
+
                     return false
                 }
             }
@@ -130,7 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (bottomIndex < gridFields.length && !similarFieldsIndex.includes(bottomIndex)) {
             checkField(bottomIndex, gridFieldColorToCheck, gridFields, cols, similarFieldsIndex);
-
         }
     };
 
@@ -140,14 +142,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 fillEmptyFieldsInColumn(index, gridFields, cols)
             }
         })
-
     };
-
 
     function fillEmptyFieldsInColumn(emptyFieldIndex, gridFields, cols) {
         let lastEmptyFieldIndex = emptyFieldIndex;
         let columnIndex = getColumnIndex(lastEmptyFieldIndex, cols);
-
 
         while (lastEmptyFieldIndex >= columnIndex) {
             let emptyField = gridFields[lastEmptyFieldIndex];
@@ -187,9 +186,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return index % cols;
     };
 
-
-    let buttonPlay = document.getElementById("box__button__play");
-
     buttonPlay.addEventListener("click", () => {
         playOnButton()
     });
@@ -199,6 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreBox.textContent = 0;
         let createRows = document.getElementById("createRows").value;
         let createColumns = document.getElementById("createColumns").value;
+
         if (createColumns === "" || createColumns == 0 && createRows === "" || createRows <= 0) {
             confirm("please enter the number of columns and rows")
         } else if (createRows === "" || createRows <= 0) {
@@ -209,9 +206,4 @@ document.addEventListener("DOMContentLoaded", () => {
             createGrid(parseInt(createRows), parseInt(createColumns));
         }
     }
-
-
 });
-
-
-
