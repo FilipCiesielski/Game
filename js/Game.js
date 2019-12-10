@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM IS READY GO FILIP!");
 
     const gridContainer = document.querySelector("#grid__container");
+    var scoreBox = document.querySelector(".box__score--result");
     var score = 0;
     const emptyFieldColor = "white";
     const notFoundIndex = -1;
@@ -42,13 +43,13 @@ document.addEventListener("DOMContentLoaded", () => {
         Array.from(gridFields).map((currentField, index) =>
             currentField.addEventListener("click", () => {
                     let similarFieldsIndex = [index];
-                    let scoreCounter = document.querySelector(".box__score--result");
+                    // let scoreCounter = document.querySelector(".box__score--result");
 
                     checkNeighbourField(index, currentField.style.backgroundColor, gridFields, cols, similarFieldsIndex);
 
                     if (similarFieldsIndex.length > 1) {
                         score += similarFieldsIndex.length;
-                        scoreCounter.textContent = score;
+                        scoreBox.textContent = score;
                         currentField.style.backgroundColor = emptyFieldColor;
 
                         fillEmptyFields(similarFieldsIndex, gridFields, cols);
@@ -195,16 +196,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function playOnButton() {
         gridContainer.innerHTML = "";
+        scoreBox.textContent = 0;
 
-        let scoreBox = document.querySelector(".box__score--result").textContent = 0;
-        score = 0;
         let createRows = document.getElementById("createRows").value;
         let createColumns = document.getElementById("createColumns").value;
-        if (createColumns === "" || createColumns == 0 && createRows === "" || createRows == 0) {
+        if (createColumns === "" || createColumns == 0 && createRows === "" || createRows <= 0) {
             confirm("please enter the number of columns and rows")
-        } else if (createRows === "" || createRows == 0) {
+        } else if (createRows === "" || createRows <= 0) {
             confirm("please enter the number of rows")
-        } else if (createColumns === "" || createColumns == 0) {
+        } else if (createColumns === "" || createColumns <= 0) {
             confirm("please enter the number of columns")
         } else {
             createGrid(parseInt(createRows), parseInt(createColumns));
